@@ -1,0 +1,268 @@
+/*
+====================================================================================================================================== 
+TASK 1.Given the employees and cities tables below, write a query for:
+     1.1 Cities without any users
+     1.2 Sort the table in ascending order.
+     1.3 Cities with less employees & cities with more employees
+     1.4 Run a query to get non-repeated countries
+======================================================================================================================================
+*/
+
+CREATE TABLE dbo.Cities (
+  City    varchar(30) PRIMARY KEY NOT NULL, 
+  Country varchar(60), 
+);
+INSERT INTO dbo.Cities VALUES ('Bogota','Colombia');
+INSERT INTO dbo.Cities VALUES ('Berlin','Germany');
+INSERT INTO dbo.Cities VALUES ('Dortmund','Germany');
+INSERT INTO dbo.Cities VALUES ('Paris','France');
+INSERT INTO dbo.Cities VALUES ('Madrid','Spain');
+INSERT INTO dbo.Cities VALUES ('Tokio','Japan');
+INSERT INTO dbo.Cities VALUES ('Barcelona','Spain');
+INSERT INTO dbo.Cities VALUES ('Vienna','Austria');
+INSERT INTO dbo.Cities VALUES ('Rome','Italy');
+INSERT INTO dbo.Cities VALUES ('Cape Town','South Africa');
+INSERT INTO dbo.Cities VALUES ('Sidney','Australia');
+
+select * from dbo.Cities
+;
+CREATE TABLE dbo.Employees (
+  user_id   char(30) PRIMARY KEY NOT NULL, 
+  Name      varchar(50) NOT NULL,
+  City      varchar(30) FOREIGN KEY REFERENCES Cities(City)
+
+);
+INSERT INTO dbo.Employees VALUES ('8uh93c02','John','Berlin');
+INSERT INTO dbo.Employees VALUES ('7da37c30','Tim','Dortmund');
+INSERT INTO dbo.Employees VALUES ('6ee361e7','Laura','Tokio');
+INSERT INTO dbo.Employees VALUES ('5351e40e','Kim','Paris');
+INSERT INTO dbo.Employees VALUES ('7dd8b192','Jenny','Paris');
+INSERT INTO dbo.Employees VALUES ('5ec60b7d','Lisa','Madrid');
+INSERT INTO dbo.Employees VALUES ('297a8ee3','Phillip','Berlin');
+INSERT INTO dbo.Employees VALUES ('854bb6f5','Mohamed','Paris');
+INSERT INTO dbo.Employees VALUES ('349a3b6c','Carlos','Berlin');
+INSERT INTO dbo.Employees VALUES ('c625ca76','Joseph','Paris');
+INSERT INTO dbo.Employees VALUES ('cb17c2c2','Katarine','Paris');
+INSERT INTO dbo.Employees VALUES ('210ffbcd','Katrin','Berlin');
+INSERT INTO dbo.Employees VALUES ('bccc79ee','Paul','Berlin');
+INSERT INTO dbo.Employees VALUES ('260b3c90','Richard','Madrid');
+INSERT INTO dbo.Employees VALUES ('68as2310','Raquel','Berlin');
+INSERT INTO dbo.Employees VALUES ('e6a2faaa','Juana','Paris');
+INSERT INTO dbo.Employees VALUES ('b1a25c07','Sarah','Madrid');
+INSERT INTO dbo.Employees VALUES ('1c1378ee','Melanie','Paris');
+INSERT INTO dbo.Employees VALUES ('1b572c91','Bob','Berlin');
+INSERT INTO dbo.Employees VALUES ('7e01a441','Xavi','Madrid');
+INSERT INTO dbo.Employees VALUES ('480f7bd3','Peter','Tokio');
+INSERT INTO dbo.Employees VALUES ('b3099911','Jessica','Barcelona');
+INSERT INTO dbo.Employees VALUES ('8fcc6585','Albert','Barcelona');
+INSERT INTO dbo.Employees VALUES ('7b1f2fca','Tamara','Tokio');
+;
+select * from dbo.Employees
+;
+-- 1.1 Cities without any users
+select c.city, e.name
+from dbo.Cities C 
+left join dbo.Employees E on e.city = c.city
+order by e.name asc
+-- The cities wothout any users are : Bogota, Cape Town, Rome, Sidney, Vienna
+
+-- 1.2 Sort the table in ascending order.
+select c.city, e.name from dbo.Cities C  
+left join dbo.Employees E on c.city = e.city 
+order by e.name asc;
+select * from dbo.Employees order by user_id asc;
+select * from dbo.Employees order by name asc;
+select * from dbo.Employees order by city asc;
+
+--1.3 Cities with less employees & cities with more employees
+select count(Name) as 'Number of Employees', city
+from dbo.Employees
+group by city
+order by count(Name) desc
+-- Berlin and Paris are the cities with most employees; On the other hand Barcelona and Dortmund are the cities with less employees 
+
+--1.4 Run a query to get non-repeated countries
+select * from dbo.Employees; 
+select * from dbo.Cities;
+
+select c.country, e.city, e.name
+from dbo.Cities C
+left join dbo.Employees E on c.city = e.city
+where e.city is null
+order by c.country asc
+-- Non repeated countries are: Australia, Austria, Colombia, Italy, South Africa 
+
+-- Additional Query
+select e.user_id, e.name, e.city, c.country
+from dbo.Employees E
+left join dbo.Cities C on e.city = c.city 
+
+/*
+====================================================================================================================================== 
+ TASK 2. Follow the Stadium Table below:
+      2.1 Run a query to find out which stadium have more than 75.000 but less than 100.000 capacity
+======================================================================================================================================
+*/
+
+CREATE TABLE dbo.Stadium (
+  Name     varchar(50),
+  Capacity int NOT NULL
+);
+
+INSERT INTO dbo.Stadium VALUES ('Rungrado 1st of May Stadium',114000);
+INSERT INTO dbo.Stadium VALUES ('Michigan Stadium',107601);
+INSERT INTO dbo.Stadium VALUES ('Beaver Stadium',107000);
+INSERT INTO dbo.Stadium VALUES ('Camp Nou',99354);
+INSERT INTO dbo.Stadium VALUES ('Wembley Stadium',90000);
+INSERT INTO dbo.Stadium VALUES ('Gaylord Family Oklahoma Memorial Stadium',86112);
+INSERT INTO dbo.Stadium VALUES ('Luzhniki Stadium',81000);
+INSERT INTO dbo.Stadium VALUES ('Jinnah Sports Stadium',80000);
+INSERT INTO dbo.Stadium VALUES ('Allianz Arena',75000);
+INSERT INTO dbo.Stadium VALUES ('Olympiastadion',74228);
+INSERT INTO dbo.Stadium VALUES ('New Era Field',73967);
+
+select * from dbo.Stadium
+;
+-- Please find the query fpr 2.1 below 
+select name as 'Name of the stadium', capacity as 'Capacity Nr'
+from dbo.Stadium 
+where capacity between 75000 and 100000
+order by capacity desc
+-- Altogether 6 stadiums have capacity between 75000 and 100000
+
+/*
+======================================================================================================================================
+TASK 3. With the table “products”:
+     3.1 Run a query to get the total product created by month & by year
+     3.2 The factory is open from 09:00 to 23:00 the first shift is from 09:00 to 16:00 and the second shift is from 16:00 to 23:00, the
+         manager wants to know which shift has been more productive since the store opened in 2018. Run a query to get product
+         created in the first shift versus products created in the second shift by month
+======================================================================================================================================
+*/
+
+CREATE TABLE dbo.Products (
+  Created_at varchar(50),
+  Product    varchar(50), 
+  User_Id    char(30) PRIMARY KEY 
+);
+INSERT INTO dbo.Products VALUES ('24/10/2019 11:00:00','Coffee','cb6756cb-9');
+INSERT INTO dbo.Products VALUES ('24/10/2019 09:00:00','Tea','e9e92807-2');
+INSERT INTO dbo.Products VALUES ('24/10/2019 22:00:00','Tea','bd52d457-e');
+INSERT INTO dbo.Products VALUES ('24/12/2018 21:00:00','Tea','a3ca75cc-a');
+INSERT INTO dbo.Products VALUES ('25/12/2018 04:00:00','Coffee','90b0e65a-b');
+INSERT INTO dbo.Products VALUES ('25/12/2018 18:00:00','Coffee','8a21a3c3-4');
+INSERT INTO dbo.Products VALUES ('24/12/2018 13:00:00','Coffee','e29cf405-c');
+INSERT INTO dbo.Products VALUES ('24/10/2018 15:00:00','Tea','fc4f2b82-c');
+INSERT INTO dbo.Products VALUES ('24/10/2018 09:00:00','Tea','6c1f25e3-a');
+INSERT INTO dbo.Products VALUES ('24/10/2018 10:00:00','Coffee','541b77d2-a');
+INSERT INTO dbo.Products VALUES ('24/10/2018 06:00:00','Coffee','342fab44-2');
+INSERT INTO dbo.Products VALUES ('24/10/2018 03:00:00','Coffee','2843aa63-8');
+INSERT INTO dbo.Products VALUES ('25/08/2019 04:00:00','Tea','06d40b5c-0');
+INSERT INTO dbo.Products VALUES ('24/08/2019 10:00:00','Coffee','73d1043a-e');
+INSERT INTO dbo.Products VALUES ('24/08/2019 08:00:00','Tea','676041c7-3');
+INSERT INTO dbo.Products VALUES ('24/08/2019 22:00:00','Tea','589844ec-c');
+INSERT INTO dbo.Products VALUES ('24/08/2019 21:00:00','Coffee','d80f12f3-3');
+INSERT INTO dbo.Products VALUES ('24/08/2019 10:00:00','Coffee','cd40d554-d');
+INSERT INTO dbo.Products VALUES ('24/06/2018 19:00:00','Tea','748ac066-4');
+INSERT INTO dbo.Products VALUES ('24/06/2018 14:00:00','Tea','46bb5d06-0');
+INSERT INTO dbo.Products VALUES ('24/06/2018 20:00:00','Coffee','16be41bf-b');
+INSERT INTO dbo.Products VALUES ('24/06/2018 19:00:00','Tea','4df34e08-c');
+INSERT INTO dbo.Products VALUES ('24/06/2018 10:00:00','Coffee','dd1e17c5-a');
+INSERT INTO dbo.Products VALUES ('24/03/2019 08:00:00','Tea','2eb2ab08-7');
+INSERT INTO dbo.Products VALUES ('24/03/2019 09:00:00','Coffee','3284e7eb-3');
+INSERT INTO dbo.Products VALUES ('24/03/2019 10:00:00','Tea','c1d27589-7');
+INSERT INTO dbo.Products VALUES ('24/01/2018 11:00:00','Tea','16579321-6');
+INSERT INTO dbo.Products VALUES ('24/01/2018 22:00:00','Coffee','f61ac9f4-5');
+INSERT INTO dbo.Products VALUES ('24/01/2018 21:00:00','Tea','7006c1bc-f');
+INSERT INTO dbo.Products VALUES ('24/01/2018 19:00:00','Tea','5a1c5b56-d')
+;
+select * from dbo.Products
+;
+-- A backup table (The queries were created on the backup table)
+CREATE TABLE dbo.Products_Backup (
+  Created_at varchar(50),
+  Product    varchar(50), 
+  User_Id    char(30) PRIMARY KEY 
+);
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2019 11:00:00','Coffee','cb6756cb-9');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2019 09:00:00','Tea','e9e92807-2');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2019 22:00:00','Tea','bd52d457-e');
+INSERT INTO dbo.Products_Backup VALUES ('24/12/2018 21:00:00','Tea','a3ca75cc-a');
+INSERT INTO dbo.Products_Backup VALUES ('25/12/2018 04:00:00','Coffee','90b0e65a-b');
+INSERT INTO dbo.Products_Backup VALUES ('25/12/2018 18:00:00','Coffee','8a21a3c3-4');
+INSERT INTO dbo.Products_Backup VALUES ('24/12/2018 13:00:00','Coffee','e29cf405-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 15:00:00','Tea','fc4f2b82-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 09:00:00','Tea','6c1f25e3-a');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 10:00:00','Coffee','541b77d2-a');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 06:00:00','Coffee','342fab44-2');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 03:00:00','Coffee','2843aa63-8');
+INSERT INTO dbo.Products_Backup VALUES ('25/08/2019 04:00:00','Tea','06d40b5c-0');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 10:00:00','Coffee','73d1043a-e');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 08:00:00','Tea','676041c7-3');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 22:00:00','Tea','589844ec-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 21:00:00','Coffee','d80f12f3-3');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 10:00:00','Coffee','cd40d554-d');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 19:00:00','Tea','748ac066-4');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 14:00:00','Tea','46bb5d06-0');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 20:00:00','Coffee','16be41bf-b');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 19:00:00','Tea','4df34e08-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 10:00:00','Coffee','dd1e17c5-a');
+INSERT INTO dbo.Products_Backup VALUES ('24/03/2019 08:00:00','Tea','2eb2ab08-7');
+INSERT INTO dbo.Products_Backup VALUES ('24/03/2019 09:00:00','Coffee','3284e7eb-3');
+INSERT INTO dbo.Products_Backup VALUES ('24/03/2019 10:00:00','Tea','c1d27589-7');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 11:00:00','Tea','16579321-6');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 22:00:00','Coffee','f61ac9f4-5');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 21:00:00','Tea','7006c1bc-f');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 19:00:00','Tea','5a1c5b56-d')
+;
+select * from dbo.Products_Backup
+;
+ALTER TABLE dbo.Products_Backup ADD Year int;
+
+UPDATE dbo.Products_Backup SET Year = 2019 FROM dbo.Products_Backup where Created_at like '%2019%';
+UPDATE dbo.Products_Backup SET Year = 2018 FROM dbo.Products_Backup where Created_at like '%2018%';
+
+ALTER TABLE dbo.Products_Backup ADD Month int;
+
+UPDATE dbo.Products_Backup SET Month = 01 FROM dbo.Products_Backup where Created_at like '%/01/201%';
+UPDATE dbo.Products_Backup SET Month = 03 FROM dbo.Products_Backup where Created_at like '%/03/201%';
+UPDATE dbo.Products_Backup SET Month = 06 FROM dbo.Products_Backup where Created_at like '%/06/201%';
+UPDATE dbo.Products_Backup SET Month = 08 FROM dbo.Products_Backup where Created_at like '%/08/201%';
+UPDATE dbo.Products_Backup SET Month = 10 FROM dbo.Products_Backup where Created_at like '%/10/201%';
+UPDATE dbo.Products_Backup SET Month = 12 FROM dbo.Products_Backup where Created_at like '%/12/201%';
+
+-- Please find the query for 3.1 below 
+select count(Product) as 'Total products', Month, Year
+from dbo.Products_Backup
+group by Month, Year
+order by Month asc 
+;
+
+ALTER TABLE dbo.Products_Backup ADD Shift varchar(20)
+;
+UPDATE dbo.Products_Backup SET Shift = '1st' 
+FROM dbo.Products_Backup 
+where Created_at like '%09:00:00' or Created_at like '%10:00:00' 
+                                  or Created_at like '%11:00:00' 
+								  or Created_at like '%12:00:00' 
+								  or Created_at like '%13:00:00'
+								  or Created_at like '%14:00:00' 
+								  or Created_at like '%15:00:00' 
+								  or Created_at like '%16:00:00'
+;
+UPDATE dbo.Products_Backup SET Shift = '2nd' 
+FROM dbo.Products_Backup 
+where Created_at like '%16:00:00' or Created_at like '%17:00:00' 
+                                  or Created_at like '%18:00:00' 
+								  or Created_at like '%19:00:00' 
+								  or Created_at like '%20:00:00'
+								  or Created_at like '%21:00:00' 
+								  or Created_at like '%22:00:00' 
+								  or Created_at like '%23:00:00'
+;
+select * from dbo.Products_Backup;
+-- Please find the query for 3.2 below 
+select count(Product) as 'Products created', Shift, Month
+from dbo.Products_Backup
+where Shift is not null
+group by Shift, Month
