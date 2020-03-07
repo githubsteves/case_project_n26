@@ -1,1 +1,108 @@
+1.Given the employees and cities tables below, write a query for:
+● Cities without any users
+● Sort the table in ascending order
+● Cities with less employees & cities with more employees
+● Run a query to get non-repeated countries
 
+Employees 
+user_id Name City 
+8uh93c02 John Berlin 
+7da37c30 Tim Dortmund 
+6ee361e7 Laura Tokio 
+5351e40e Kim Paris 
+7dd8b192 Jenny Paris 
+5ec60b7d Lisa Madrid 
+297a8ee3 Phillip Berlin 
+854bb6f5 Mohamed Paris 
+349a3b6c Carlos Berlin 
+c625ca76 Joseph Paris 
+cb17c2c2 Katarine Paris 
+210ffbcd Katrin Berlin
+bccc79ee Paul Berlin
+260b3c90 Richard Madrid
+68as2310 Raquel Berlin
+e6a2faaa Juana Paris
+b1a25c07 Sarah Madrid
+1c1378ee Melanie Paris
+1b572c91 Bob Berlin
+7e01a441 Xavi Madrid
+480f7bd3 Peter Tokio
+b3099911 Jessica Barcelona
+8fcc6585 Albert Barcelona
+7b1f2fca Tamara Tokio
+
+
+Cities
+City Country
+Bogota Colombia
+Berlin Germany
+Dortmund Germany
+Paris France
+Madrid Spain
+Tokio Japan
+Barcelona Spain
+Vienna Austria
+Rome Italy
+Cape Town South Africa
+Sidney Australia
+
+
+
+2. Follow the Stadium Table below:
+● Run a query to find out which stadium have more than 75.000 but less than 100.000 capacity
+
+Stadium
+Name Capacity
+Rungrado 1st of May Stadium 114000
+Michigan Stadium 107601
+Beaver Stadium 107000
+Camp Nou 99354
+Wembley Stadium 90000
+Gaylord Family Oklahoma Memorial
+Stadium 86112
+Luzhniki Stadium 81000
+Jinnah Sports Stadium 80000
+Allianz Arena 75000
+Olympiastadion 74228
+New Era Field 73967
+
+
+
+3. With the table “products”:
+● Run a query to get the total product created by month & by year
+● The factory is open from 09:00 to 23:00 the first shift is from 09:00 to 16:00 and the second shift is from 16:00 to 23:00, the
+manager wants to know which shift has been more productive since the store opened in 2018. Run a query to get product
+created in the first shift versus products created in the second shift by month
+
+Products
+Created_at Product User_id
+24/10/2019 11:00:00 Coffee cb6756cb-9
+24/10/2019 09:00:00 Tea e9e92807-2
+24/10/2019 22:00:00 Tea bd52d457-e
+24/12/2018 21:00:00 Tea a3ca75cc-a
+25/12/2018 04:00:00 Coffee 90b0e65a-b
+25/12/2018 18:00:00 Coffee 8a21a3c3-4
+24/12/2018 13:00:00 Coffee e29cf405-c
+24/10/2018 15:00:00 Tea fc4f2b82-c
+24/10/2018 09:00:00 Tea 6c1f25e3-a
+24/10/2018 10:00:00 Coffee 541b77d2-a
+24/10/2018 06:00:00 Coffee 342fab44-2
+24/10/2018 03:00:00 Coffee 2843aa63-8
+25/08/2019 04:00:00 Tea 06d40b5c-0
+24/08/2019 10:00:00 Coffee 73d1043a-e
+24/08/2019 08:00:00 Tea 676041c7-3
+24/08/2019 22:00:00 Tea 589844ec-c
+24/08/2019 21:00:00 Coffee d80f12f3-3
+24/08/2019 10:00:00 Coffee cd40d554-d
+24/06/2018 19:00:00 Tea 748ac066-4
+24/06/2018 14:00:00 Tea 46bb5d06-0
+24/06/2018 20:00:00 Coffee 16be41bf-b
+24/06/2018 19:00:00 Tea 4df34e08-c
+24/06/2018 10:00:00 Coffee dd1e17c5-a
+24/03/2019 08:00:00 Tea 2eb2ab08-7
+24/03/2019 09:00:00 Coffee 3284e7eb-3
+24/03/2019 10:00:00 Tea c1d27589-7
+24/01/2018 11:00:00 Tea 16579321-6
+24/01/2018 22:00:00 Coffee f61ac9f4-5
+24/01/2018 21:00:00 Tea 7006c1bc-f
+24/01/2018 19:00:00 Tea 5a1c5b56-d
