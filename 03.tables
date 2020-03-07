@@ -1,0 +1,147 @@
+CREATE TABLE dbo.Cities (
+  City    varchar(30) PRIMARY KEY NOT NULL, 
+  Country varchar(60), 
+);
+INSERT INTO dbo.Cities VALUES ('Bogota','Colombia');
+INSERT INTO dbo.Cities VALUES ('Berlin','Germany');
+INSERT INTO dbo.Cities VALUES ('Dortmund','Germany');
+INSERT INTO dbo.Cities VALUES ('Paris','France');
+INSERT INTO dbo.Cities VALUES ('Madrid','Spain');
+INSERT INTO dbo.Cities VALUES ('Tokio','Japan');
+INSERT INTO dbo.Cities VALUES ('Barcelona','Spain');
+INSERT INTO dbo.Cities VALUES ('Vienna','Austria');
+INSERT INTO dbo.Cities VALUES ('Rome','Italy');
+INSERT INTO dbo.Cities VALUES ('Cape Town','South Africa');
+INSERT INTO dbo.Cities VALUES ('Sidney','Australia');
+
+select * from dbo.Cities
+;
+CREATE TABLE dbo.Employees (
+  user_id   char(30) PRIMARY KEY NOT NULL, 
+  Name      varchar(50) NOT NULL,
+  City      varchar(30) FOREIGN KEY REFERENCES Cities(City)
+
+);
+INSERT INTO dbo.Employees VALUES ('8uh93c02','John','Berlin');
+INSERT INTO dbo.Employees VALUES ('7da37c30','Tim','Dortmund');
+INSERT INTO dbo.Employees VALUES ('6ee361e7','Laura','Tokio');
+INSERT INTO dbo.Employees VALUES ('5351e40e','Kim','Paris');
+INSERT INTO dbo.Employees VALUES ('7dd8b192','Jenny','Paris');
+INSERT INTO dbo.Employees VALUES ('5ec60b7d','Lisa','Madrid');
+INSERT INTO dbo.Employees VALUES ('297a8ee3','Phillip','Berlin');
+INSERT INTO dbo.Employees VALUES ('854bb6f5','Mohamed','Paris');
+INSERT INTO dbo.Employees VALUES ('349a3b6c','Carlos','Berlin');
+INSERT INTO dbo.Employees VALUES ('c625ca76','Joseph','Paris');
+INSERT INTO dbo.Employees VALUES ('cb17c2c2','Katarine','Paris');
+INSERT INTO dbo.Employees VALUES ('210ffbcd','Katrin','Berlin');
+INSERT INTO dbo.Employees VALUES ('bccc79ee','Paul','Berlin');
+INSERT INTO dbo.Employees VALUES ('260b3c90','Richard','Madrid');
+INSERT INTO dbo.Employees VALUES ('68as2310','Raquel','Berlin');
+INSERT INTO dbo.Employees VALUES ('e6a2faaa','Juana','Paris');
+INSERT INTO dbo.Employees VALUES ('b1a25c07','Sarah','Madrid');
+INSERT INTO dbo.Employees VALUES ('1c1378ee','Melanie','Paris');
+INSERT INTO dbo.Employees VALUES ('1b572c91','Bob','Berlin');
+INSERT INTO dbo.Employees VALUES ('7e01a441','Xavi','Madrid');
+INSERT INTO dbo.Employees VALUES ('480f7bd3','Peter','Tokio');
+INSERT INTO dbo.Employees VALUES ('b3099911','Jessica','Barcelona');
+INSERT INTO dbo.Employees VALUES ('8fcc6585','Albert','Barcelona');
+INSERT INTO dbo.Employees VALUES ('7b1f2fca','Tamara','Tokio');
+;
+select * from dbo.Employees
+
+CREATE TABLE dbo.Stadium (
+  Name     varchar(50),
+  Capacity int NOT NULL
+);
+
+INSERT INTO dbo.Stadium VALUES ('Rungrado 1st of May Stadium',114000);
+INSERT INTO dbo.Stadium VALUES ('Michigan Stadium',107601);
+INSERT INTO dbo.Stadium VALUES ('Beaver Stadium',107000);
+INSERT INTO dbo.Stadium VALUES ('Camp Nou',99354);
+INSERT INTO dbo.Stadium VALUES ('Wembley Stadium',90000);
+INSERT INTO dbo.Stadium VALUES ('Gaylord Family Oklahoma Memorial Stadium',86112);
+INSERT INTO dbo.Stadium VALUES ('Luzhniki Stadium',81000);
+INSERT INTO dbo.Stadium VALUES ('Jinnah Sports Stadium',80000);
+INSERT INTO dbo.Stadium VALUES ('Allianz Arena',75000);
+INSERT INTO dbo.Stadium VALUES ('Olympiastadion',74228);
+INSERT INTO dbo.Stadium VALUES ('New Era Field',73967);
+
+select * from dbo.Stadium
+;
+
+CREATE TABLE dbo.Products (
+  Created_at varchar(50),
+  Product    varchar(50), 
+  User_Id    char(30) PRIMARY KEY 
+);
+INSERT INTO dbo.Products VALUES ('24/10/2019 11:00:00','Coffee','cb6756cb-9');
+INSERT INTO dbo.Products VALUES ('24/10/2019 09:00:00','Tea','e9e92807-2');
+INSERT INTO dbo.Products VALUES ('24/10/2019 22:00:00','Tea','bd52d457-e');
+INSERT INTO dbo.Products VALUES ('24/12/2018 21:00:00','Tea','a3ca75cc-a');
+INSERT INTO dbo.Products VALUES ('25/12/2018 04:00:00','Coffee','90b0e65a-b');
+INSERT INTO dbo.Products VALUES ('25/12/2018 18:00:00','Coffee','8a21a3c3-4');
+INSERT INTO dbo.Products VALUES ('24/12/2018 13:00:00','Coffee','e29cf405-c');
+INSERT INTO dbo.Products VALUES ('24/10/2018 15:00:00','Tea','fc4f2b82-c');
+INSERT INTO dbo.Products VALUES ('24/10/2018 09:00:00','Tea','6c1f25e3-a');
+INSERT INTO dbo.Products VALUES ('24/10/2018 10:00:00','Coffee','541b77d2-a');
+INSERT INTO dbo.Products VALUES ('24/10/2018 06:00:00','Coffee','342fab44-2');
+INSERT INTO dbo.Products VALUES ('24/10/2018 03:00:00','Coffee','2843aa63-8');
+INSERT INTO dbo.Products VALUES ('25/08/2019 04:00:00','Tea','06d40b5c-0');
+INSERT INTO dbo.Products VALUES ('24/08/2019 10:00:00','Coffee','73d1043a-e');
+INSERT INTO dbo.Products VALUES ('24/08/2019 08:00:00','Tea','676041c7-3');
+INSERT INTO dbo.Products VALUES ('24/08/2019 22:00:00','Tea','589844ec-c');
+INSERT INTO dbo.Products VALUES ('24/08/2019 21:00:00','Coffee','d80f12f3-3');
+INSERT INTO dbo.Products VALUES ('24/08/2019 10:00:00','Coffee','cd40d554-d');
+INSERT INTO dbo.Products VALUES ('24/06/2018 19:00:00','Tea','748ac066-4');
+INSERT INTO dbo.Products VALUES ('24/06/2018 14:00:00','Tea','46bb5d06-0');
+INSERT INTO dbo.Products VALUES ('24/06/2018 20:00:00','Coffee','16be41bf-b');
+INSERT INTO dbo.Products VALUES ('24/06/2018 19:00:00','Tea','4df34e08-c');
+INSERT INTO dbo.Products VALUES ('24/06/2018 10:00:00','Coffee','dd1e17c5-a');
+INSERT INTO dbo.Products VALUES ('24/03/2019 08:00:00','Tea','2eb2ab08-7');
+INSERT INTO dbo.Products VALUES ('24/03/2019 09:00:00','Coffee','3284e7eb-3');
+INSERT INTO dbo.Products VALUES ('24/03/2019 10:00:00','Tea','c1d27589-7');
+INSERT INTO dbo.Products VALUES ('24/01/2018 11:00:00','Tea','16579321-6');
+INSERT INTO dbo.Products VALUES ('24/01/2018 22:00:00','Coffee','f61ac9f4-5');
+INSERT INTO dbo.Products VALUES ('24/01/2018 21:00:00','Tea','7006c1bc-f');
+INSERT INTO dbo.Products VALUES ('24/01/2018 19:00:00','Tea','5a1c5b56-d')
+;
+
+-- A backup table (The queries were created on the backup table)
+CREATE TABLE dbo.Products_Backup (
+  Created_at varchar(50),
+  Product    varchar(50), 
+  User_Id    char(30) PRIMARY KEY 
+);
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2019 11:00:00','Coffee','cb6756cb-9');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2019 09:00:00','Tea','e9e92807-2');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2019 22:00:00','Tea','bd52d457-e');
+INSERT INTO dbo.Products_Backup VALUES ('24/12/2018 21:00:00','Tea','a3ca75cc-a');
+INSERT INTO dbo.Products_Backup VALUES ('25/12/2018 04:00:00','Coffee','90b0e65a-b');
+INSERT INTO dbo.Products_Backup VALUES ('25/12/2018 18:00:00','Coffee','8a21a3c3-4');
+INSERT INTO dbo.Products_Backup VALUES ('24/12/2018 13:00:00','Coffee','e29cf405-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 15:00:00','Tea','fc4f2b82-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 09:00:00','Tea','6c1f25e3-a');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 10:00:00','Coffee','541b77d2-a');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 06:00:00','Coffee','342fab44-2');
+INSERT INTO dbo.Products_Backup VALUES ('24/10/2018 03:00:00','Coffee','2843aa63-8');
+INSERT INTO dbo.Products_Backup VALUES ('25/08/2019 04:00:00','Tea','06d40b5c-0');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 10:00:00','Coffee','73d1043a-e');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 08:00:00','Tea','676041c7-3');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 22:00:00','Tea','589844ec-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 21:00:00','Coffee','d80f12f3-3');
+INSERT INTO dbo.Products_Backup VALUES ('24/08/2019 10:00:00','Coffee','cd40d554-d');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 19:00:00','Tea','748ac066-4');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 14:00:00','Tea','46bb5d06-0');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 20:00:00','Coffee','16be41bf-b');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 19:00:00','Tea','4df34e08-c');
+INSERT INTO dbo.Products_Backup VALUES ('24/06/2018 10:00:00','Coffee','dd1e17c5-a');
+INSERT INTO dbo.Products_Backup VALUES ('24/03/2019 08:00:00','Tea','2eb2ab08-7');
+INSERT INTO dbo.Products_Backup VALUES ('24/03/2019 09:00:00','Coffee','3284e7eb-3');
+INSERT INTO dbo.Products_Backup VALUES ('24/03/2019 10:00:00','Tea','c1d27589-7');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 11:00:00','Tea','16579321-6');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 22:00:00','Coffee','f61ac9f4-5');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 21:00:00','Tea','7006c1bc-f');
+INSERT INTO dbo.Products_Backup VALUES ('24/01/2018 19:00:00','Tea','5a1c5b56-d')
+;
+select * from dbo.Products_Backup
+;
